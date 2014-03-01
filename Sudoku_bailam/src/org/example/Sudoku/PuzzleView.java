@@ -102,11 +102,10 @@ public class PuzzleView extends View {
 			for(int j=0;j<9;j++)
 			{
 				boolean test = this.game.getTileString_old(i, j).equalsIgnoreCase("");
-				Log.v("", ""+test);
 				if(test==true){
-					canvas.drawText(this.game.getTileString(i,j), i*width + x,j*height + y, foreground);}
+					canvas.drawText(this.game.getTileString_old(i, j), i*width + x,j*height + y, foreground2);}
 				else if (test==false) {
-					canvas.drawText(this.game.getTileString(i,j), i*width + x,j*height + y, foreground2);
+					canvas.drawText(this.game.getTileString(i,j), i*width + x,j*height + y, foreground);
 				} 
 				
 				
