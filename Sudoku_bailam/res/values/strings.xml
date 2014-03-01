@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Sudoku</string>
+    <string name="main_title">Android Sudoku</string>
+    <string name="continue_lable">Continue</string>
+    <string name="new_game_lable">New Game</string>
+    <string name="about_lable">About</string>
+    <string name="exit_lable">Exit</string>
+    <string name="about_title">About Android Sudoku</string>
+    <string name="about_text">Bạn có thể thắng khi các hàng dọc hàng ngang và nhóm ô đủ số từ 1-9</string>
+    <string name="setting_lable">Setting...</string>
+    <string name="setting_title">Sudoku setting</string>
+    <string name="setting_shortcut">s</string>
+    <string name="music_title">Music</string>
+    <string name="music_summary">Play backgroup music</string>
+    <string name="hints_title">Hints</string>
+    <string name="hints_summary">Show hints during play</string>
+    <string name="new_game_title">Difficulty</string>
+    <string name="easy_lable">Easy</string>
+    <string name="medium_lable">Medium</string>
+    <string name="hard_lable">Hard</string>
+    <string name="game_title">Game</string>
+    <string name="no_moves_lable">No moves</string>
+    <string name="keypad_title">Keypad</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+
+</resources>
