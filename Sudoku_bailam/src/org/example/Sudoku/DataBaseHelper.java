@@ -90,7 +90,6 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public int[] getPuzzle(){
     	String matrix2 = showDB();
     	int[] matrix =  StringToInt(matrix2);
-    	matrix = Matrix_ToLv(1, matrix);
     	return matrix;
     }
     public int[] StringToInt(String matrix){

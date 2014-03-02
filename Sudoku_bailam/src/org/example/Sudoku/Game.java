@@ -8,10 +8,13 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -47,6 +50,12 @@ public class Game extends Activity {
 	          //start new activity
 	      }
 	  };
+	 private boolean getHints(){
+		 SharedPreferences pre =  PreferenceManager.getDefaultSharedPreferences(this);
+		 Toast.makeText(this, String.valueOf(pre.getBoolean("hints", true)), Toast.LENGTH_LONG).show();
+		 return pre.getBoolean("hints", true);
+		 
+	 }
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -57,8 +66,8 @@ public class Game extends Activity {
 				public void run() {
 					Log.d(TAG, "onCreate");
 					
-					puzzle = getPuzzle();
-					//puzzle = dbManager.getPuzzle();
+					//puzzle = getPuzzle();
+					puzzle = dbManager.getPuzzle();
 					puzzle_old=puzzle;
 					mypuzzle=conver_Puzzle(puzzle);
 					finishedHandler.sendEmptyMessage(0);
@@ -79,7 +88,7 @@ public class Game extends Activity {
 		toast.show();
 		} else {
 		Log.d(TAG, "showKeypad: used=" + toPuzzleString(tiles));
-		Dialog v = new Keypad(this, tiles, puzzleView);
+		Dialog v = new Keypad(this, tiles, puzzleView,getHints());
 		v.show();
 		}
 		}
@@ -279,8 +288,10 @@ public class Game extends Activity {
  
         case R.id.Solver:
         	SolverBacktracking sol =  new SolverBacktracking();
+        	grid = new Grid(mypuzzle);
         	grid = sol.solve(grid);
 			puzzle = Matrix_toArray(grid.getMatrix());
+			puzzle_old=puzzle;
 			mypuzzle=conver_Puzzle(puzzle);
 			calculateUsedTiles();
 			puzzleView = new PuzzleView(this);

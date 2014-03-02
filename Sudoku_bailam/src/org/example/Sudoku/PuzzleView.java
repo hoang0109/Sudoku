@@ -3,18 +3,21 @@ package org.example.Sudoku;
 import android.R.bool;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 public class PuzzleView extends View {
 	private static final String TAG ="Sudoku" ;
@@ -24,8 +27,10 @@ public class PuzzleView extends View {
 	private int selX ;
 	private int selY ;
 	private Rect selRect = new Rect();
+
 	public PuzzleView(Context context){
 		super(context);
+		
 		this.game = (Game) context ;
 		setFocusable(true);
 		setFocusableInTouchMode(true);
@@ -50,7 +55,6 @@ public class PuzzleView extends View {
 	@Override
 	protected void onDraw(Canvas canvas){
 		//ve nen
-		canvas.restore();
 		Paint background = new Paint();
 		background.setColor(getResources().getColor(R.color.puzzle_background));
 		canvas.drawRect(0,0,getWidth(),getHeight(),background);
@@ -92,7 +96,11 @@ public class PuzzleView extends View {
 		foreground.setTextSize(height*0.75f);
 		foreground.setTextScaleX(width/height);
 		foreground.setTextAlign(Paint.Align.CENTER);
-		Paint foreground2 = foreground;
+		Paint foreground2 = new Paint(Paint.ANTI_ALIAS_FLAG);
+		foreground2.setStyle(Style.FILL);
+		foreground2.setTextSize(height*0.75f);
+		foreground2.setTextScaleX(width/height);
+		foreground2.setTextAlign(Paint.Align.CENTER);
 		foreground2.setColor(getResources().getColor(R.color.puzzle_foreground2));
 		FontMetrics fm = foreground.getFontMetrics();
 		
@@ -104,8 +112,8 @@ public class PuzzleView extends View {
 				boolean test = this.game.getTileString_old(i, j).equalsIgnoreCase("");
 				if(test==true){
 					canvas.drawText(this.game.getTileString_old(i, j), i*width + x,j*height + y, foreground2);}
-				else if (test==false) {
-					canvas.drawText(this.game.getTileString(i,j), i*width + x,j*height + y, foreground);
+				if (test==false) {
+					canvas.drawText(this.game.getTileString_old(i, j), i*width + x,j*height + y, foreground);
 				} 
 				
 				

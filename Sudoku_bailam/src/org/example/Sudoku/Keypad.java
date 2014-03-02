@@ -1,5 +1,6 @@
 package org.example.Sudoku;
 
+import android.R.bool;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -11,8 +12,10 @@ public class Keypad extends Dialog {
 	private View keypad;
 	private final int useds[];
 	private final PuzzleView puzzleView;
-public Keypad(Context context, int useds[], PuzzleView puzzleView) {
+	private boolean hints;
+public Keypad(Context context, int useds[], PuzzleView puzzleView,boolean hints) {
 		super(context);
+		this.hints=hints;
 		this.useds = useds;
 		this.puzzleView = puzzleView;
 	}
@@ -22,10 +25,12 @@ protected void onCreate(Bundle savedInstanceState) {
 		setTitle(R.string.keypad_title);
 		setContentView(R.layout.keypad);
 		findViews();
-//		for (int element : useds) {
-//			if (element != 0)
-//			keys[element - 1].setVisibility(View.INVISIBLE);
-//		}
+		if(hints==true){
+		for (int element : useds) {
+			if (element != 0)
+			keys[element - 1].setVisibility(View.INVISIBLE);
+		}
+		}
 		setListeners();
 	}
 // ...
