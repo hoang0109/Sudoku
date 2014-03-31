@@ -2,8 +2,6 @@ package org.example.Sudoku;
 import org.example.Sudoku.*;
 import org.sudoku.complete.*;
 
-
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -24,6 +22,8 @@ import android.widget.Toast;
 
 public class Game extends Activity {
 	private static final String TAG = "Sudoku" ;
+	public static final String KEY_DIFFICULTY = "difficulty";
+	public static int diff=1;
 	private GeneratorStraighForward Generator = new GeneratorStraighForward();
 	private Grid grid = new Grid();
 	private int puzzle[] = new int[9 * 9] ; 
@@ -56,6 +56,7 @@ public class Game extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+		diff = getIntent().getIntExtra(KEY_DIFFICULTY, 1);
 		pd = ProgressDialog.show(Game.this, "Đang khởi tạo", "Đang khởi tạo ma trân sudoku", true, false);
         new Thread(new Runnable() {
         	
@@ -64,7 +65,7 @@ public class Game extends Activity {
 					Log.d(TAG, "onCreate");
 					
 					//puzzle = getPuzzle();
-					puzzle = dbManager.getPuzzle();
+					puzzle = dbManager.getPuzzle("puzzle81",diff);
 					mypuzzle=conver_Puzzle(puzzle);
 					finishedHandler.sendEmptyMessage(0);
                 }

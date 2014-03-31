@@ -87,8 +87,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         String myPath = DB_PATH + DB_NAME;
     	myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
     }
-    public int[] getPuzzle(){
-    	String matrix2 = showDB();
+    public int[] getPuzzle(String db_,int diff){
+    	String matrix2 = showDB(db_,diff);
     	int[] matrix =  StringToInt(matrix2);
     	return matrix;
     }
@@ -109,9 +109,9 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 		}
 		return Matrix;
 	}
-	public String showDB(){
+	public String showDB(String db_,int diff){
 		DataBaseHelper dbManager =  this;
-        String sql = "SELECT * FROM Matrix ORDER BY Random() LIMIT 1";
+        String sql = "SELECT * FROM "+db_+" where dif="+diff+"  ORDER BY Random() LIMIT 1";
         
         // Chep File MYPTITDEMO.sqlite vao "/data/data/com.example.democonnectdbfromasset/databases/";
         try {
@@ -126,7 +126,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         cursor.moveToFirst();
         String str="";
         while(!cursor.isAfterLast()){
-        	String MaTrix = cursor.getString(cursor.getColumnIndex("Matrix_"));
+        	String MaTrix = cursor.getString(cursor.getColumnIndex("puzzle"));
         	str+=MaTrix;
         	cursor.moveToNext();
         }

@@ -1,5 +1,6 @@
 package org.example.Sudoku;
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -45,7 +46,7 @@ public class Sudoku extends Activity implements OnClickListener {
     		startActivity(i);
     		break ;
     	case R.id.new_button:
-    		startGame();
+    		openNewGameDialog();
     		break ;
     	case R.id.exit_button:
     		finish();
@@ -69,17 +70,38 @@ public class Sudoku extends Activity implements OnClickListener {
     	}
     	return false ;
     }
+    
     private void openNewGameDialog(){
+    	final AlertDialog myAlertDialog = new AlertDialog.Builder(this).setTitle(R.string.start_game).setItems(R.array.difficulty, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface arg0, int i) {
+				// TODO Auto-generated method stub
+				startGame(i);
+			}
+
+			private void startGame(int i) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(Sudoku.this,Game.class);
+				intent.putExtra(Game.KEY_DIFFICULTY,i);
+				startActivity(intent);
+			}
+		}).create();
+    	new AlertDialog.Builder(this).setTitle(R.string.start_game).setItems(R.array.level, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface arg0, int i) {
+				// TODO Auto-generated method stub
+				myAlertDialog.show();
+			}
+
+			private void startGame(int i) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(Sudoku.this,Game.class);
+				intent.putExtra(Game.KEY_DIFFICULTY,i);
+				startActivity(intent);
+			}
+		}).show();
     	
-    	AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-		 new DialogInterface.OnClickListener() {
-		 
-		public void onClick(DialogInterface dialog,
-		 int which) {
-			startGame();
-		 }
-		 };
-		 alertDialog.show();
+    	
     }	
 	// Phuong thuc khoi dong Game theo do kho
     private void startGame(int i){
