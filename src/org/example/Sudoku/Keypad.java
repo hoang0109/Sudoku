@@ -1,6 +1,5 @@
 package org.example.Sudoku;
 
-import android.R.bool;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;

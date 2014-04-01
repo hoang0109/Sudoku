@@ -3,6 +3,7 @@ package org.example.Sudoku;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 public class Sudoku extends Activity implements OnClickListener {
     /** Called when the activity is first created. */
 	private static final String TAG = "Sudoku" ;
+	int level=0;
 	 public static Handler finishedHandler = new Handler() {
 	      @Override public void handleMessage(Message msg) {
 	          pd.dismiss();
@@ -72,34 +74,41 @@ public class Sudoku extends Activity implements OnClickListener {
     }
     
     private void openNewGameDialog(){
+    	
+    	int dif =0;
+    	
     	final AlertDialog myAlertDialog = new AlertDialog.Builder(this).setTitle(R.string.start_game).setItems(R.array.difficulty, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface arg0, int i) {
 				// TODO Auto-generated method stub
-				startGame(i);
+				
+				startGame(level,i);
 			}
 
-			private void startGame(int i) {
+			private void startGame(int level,int i) {
+				Log.v("TAG","level = "+level);
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(Sudoku.this,Game.class);
-				intent.putExtra(Game.KEY_DIFFICULTY,i);
-				startActivity(intent);
+				if(level==0){
+				Intent intent = new Intent(Sudoku.this,Game6.class);
+				intent.putExtra(Game6.KEY_DIFFICULTY,i);
+				startActivity(intent);}
+				if(level==1) {
+					Intent intent = new Intent(Sudoku.this,Game.class);
+					intent.putExtra(Game.KEY_DIFFICULTY,i);
+					startActivity(intent);
+				}
 			}
 		}).create();
     	new AlertDialog.Builder(this).setTitle(R.string.start_game).setItems(R.array.level, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface arg0, int i) {
 				// TODO Auto-generated method stub
+				level = i;
 				myAlertDialog.show();
 			}
 
-			private void startGame(int i) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(Sudoku.this,Game.class);
-				intent.putExtra(Game.KEY_DIFFICULTY,i);
-				startActivity(intent);
-			}
 		}).show();
+    	
     	
     	
     }	

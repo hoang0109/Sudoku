@@ -66,6 +66,7 @@ public class Game extends Activity {
 					
 					//puzzle = getPuzzle();
 					puzzle = dbManager.getPuzzle("puzzle81",diff);
+					Log.d(TAG, "diff = "+diff);
 					mypuzzle=conver_Puzzle(puzzle);
 					finishedHandler.sendEmptyMessage(0);
                 }

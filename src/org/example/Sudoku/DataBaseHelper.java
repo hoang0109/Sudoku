@@ -93,7 +93,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     	return matrix;
     }
     public int[] StringToInt(String matrix){
-		int[] ketqua = new int[81];
+		int[] ketqua = new int[matrix.length()];
 		for (int i = 0; i < ketqua.length; i++) {
 			ketqua[i]=Integer.parseInt(matrix.charAt(i)+"");
 		}
