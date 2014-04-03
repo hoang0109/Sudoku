@@ -52,8 +52,7 @@ public class Game6 extends Activity {
         puzzleView = new PuzzleView6(this);
 		setContentView(puzzleView);
 		puzzleView.requestFocus();
-
-		
+	
 	}
 	// chuyen int[] thành int[][]
 		static protected int[][] conver_Puzzle(int[] puz){
@@ -163,9 +162,22 @@ public class Game6 extends Activity {
 			toast.show();
 			} else {
 			Log.d(TAG, "showKeypad: used=" + toPuzzleString(tiles));
-			Dialog v = new Keypad(this, tiles, puzzleView,getHints());
+			Dialog v = new Keypad6(this, tiles, puzzleView,getHints());
 			v.show();
 			}
+			}
+		
+		protected boolean setTileIfValid(int x, int y, int value) {
+			int tiles[] = getUsedTiles(x, y);
+			if (value != 0) {
+			for (int tile : tiles) {
+			if (tile == value)
+			return false;
+			}
+			}
+			setTile(x, y, value);
+			calculateUsedTiles();
+			return true;
 			}
 	// lay gia tri so tai vi tri x,y
 	protected String getTileString(int x, int y) {

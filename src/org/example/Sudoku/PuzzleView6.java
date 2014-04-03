@@ -161,8 +161,8 @@ public class PuzzleView6 extends View{
 			
 			select((int) (event.getX() / width),
 			(int) (event.getY() / height));
-	  			 if(this.game.mypuzzle[selY][selX]==0){
-	  				game.showKeypadOrError(selX, selY);
+	  			 if(this.game6.mypuzzle[selY][selX]==0){
+	  				game6.showKeypadOrError(selX, selY);
 	  				Log.d(TAG, "onTouchEvent: x " + selX + ", y " + selY);
 	  				return true;
 	  			 }
@@ -175,11 +175,11 @@ public class PuzzleView6 extends View{
 		}
 		// phuong thuc setSelectedTile() lay ki tu tren ban phim
 		void setSelectedTile(int tile){
-			if(game.setTileIfValid(selX,selY,tile)){
+			if(game6.setTileIfValid(selX,selY,tile)){
 				invalidate();
 			}else {
 				Log.d(TAG, "setSelectedTile : invalid " + tile );
-				startAnimation(AnimationUtils.loadAnimation(game,R.anim.shake));
+				startAnimation(AnimationUtils.loadAnimation(game6,R.anim.shake));
 			}
 		}
 	

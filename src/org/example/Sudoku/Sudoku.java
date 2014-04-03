@@ -74,9 +74,7 @@ public class Sudoku extends Activity implements OnClickListener {
     }
     
     private void openNewGameDialog(){
-    	
     	int dif =0;
-    	
     	final AlertDialog myAlertDialog = new AlertDialog.Builder(this).setTitle(R.string.start_game).setItems(R.array.difficulty, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface arg0, int i) {
@@ -108,9 +106,7 @@ public class Sudoku extends Activity implements OnClickListener {
 			}
 
 		}).show();
-    	
-    	
-    	
+    	    	
     }	
 	// Phuong thuc khoi dong Game theo do kho
     private void startGame(int i){
