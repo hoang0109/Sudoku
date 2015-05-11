@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<array name="difficulty">
+		<item>@string/easy_lable</item>
+		<item>@string/medium_lable</item>
+		<item>@string/hard_lable</item>
+	</array>
+	<array name="level">
+		<item>@string/lv36</item>
+		<item>@string/lv81</item>
+	</array>
+</resources>
